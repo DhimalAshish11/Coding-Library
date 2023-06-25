@@ -1,0 +1,25 @@
+
+@rootApi = http://localhost:8000
+### server testing
+@userApi = {{rootApi}}/api/v1/user
+
+GET {{rootApi}}
+
+#### GETuser
+GET {{userApi}}
+
+
+#### CXREATE USER
+POST  {{userApi}}
+Content-Type: application/json
+
+{
+    "role": "student",
+    "fname": "Robert",
+    "lname": "Smith",
+    "phone":"09488",
+    "address": "WAATERLOO",
+    "email": "emil@11",
+    "password": "1234"
+    
+}
