@@ -27,11 +27,11 @@ router.post("/", async (req, res) => {
     const user = await insertUser(req.body);
     user?._id
       ? res.json({
-          statu: "success",
+          status: "success",
           message: "New user has been created successfull",
         })
       : res.json({
-          statu: "error",
+          status: "error",
           message: "Unable to craete user, try again later",
         });
   } catch (error) {
