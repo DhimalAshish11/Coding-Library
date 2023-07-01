@@ -1,8 +1,8 @@
 import express from "express";
-import { hashPassword } from "../utils/bcrypt.js";
+import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 
 import { insertUser } from "../models/user/UserModel.js";
-
+import { getUserByEmail } from "../models/user/UserModel.js";
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
     console.log(req.body);
 
     res.json({
-      status: "sucess",
+      status: "success",
       message: "Here are the user information",
     });
   } catch (error) {
@@ -43,6 +43,40 @@ router.post("/", async (req, res) => {
     res.json({
       status: "error",
       message: msg,
+    });
+  }
+});
+
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await getUserByEmail(email);
+
+    if (user?._id) {
+      const isMatch = comparePassword(password, user.password);
+      console.log(isMatch);
+      if (isMatch) {
+        user.password = undefined;
+        return res.json({
+          status: "success",
+          message: "Login Successcully",
+          user,
+        });
+      }
+    }
+
+    res.json({
+      status: "error",
+      message: "Invalid LogIn",
+    });
+    //get data
+    //check if the user exit with the recieved email and get user from db
+    //use bcrypt to check if the password is matching
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
     });
   }
 });
