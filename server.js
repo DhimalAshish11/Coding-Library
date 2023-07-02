@@ -23,8 +23,10 @@ app.use(cors());
 ///APIS
 
 import useRouter from "./src/routers/userRouter.js";
+import bookRouter from "./src/routers/bookRouter.js";
 
 app.use("/api/v1/user", useRouter);
+app.use("/api/v1/book", bookRouter);
 
 /* app.use("/api/v1/user", (req, res) => {
   res.json({
