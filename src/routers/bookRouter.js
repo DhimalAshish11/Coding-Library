@@ -1,5 +1,10 @@
 import express from "express";
-import { addBook, getBooks, updateBooks } from "../models/books/BookModel.js";
+import {
+  addBook,
+  deleteBook,
+  getBooks,
+  updateBooks,
+} from "../models/books/BookModel.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -41,13 +46,14 @@ router.get("/", async (req, res) => {
 
 router.put("/", async (req, res) => {
   try {
-    const { __v, _d, ...rest } = req.body;
-    const result = await updateBooks(req.body);
+    const { __v, _id, ...rest } = req.body;
+
+    const result = await updateBooks(_id, rest);
 
     result?._id
       ? res.json({
           status: "success",
-          message: "New book has been updated succesfully",
+          message: " Book has been updated successfully",
         })
       : res.json({
           status: "error",
@@ -64,16 +70,21 @@ router.put("/", async (req, res) => {
 router.delete("/:_id", async (req, res) => {
   try {
     const { _id } = req.params;
-    const books = await deleteBooks(_id);
-    res.json({
-      status: "success",
-      message: "The book has been deleted",
-      books,
-    });
+    const books = await deleteBook(_id);
+
+    books?._id
+      ? res.json({
+          status: "success",
+          message: "The book has been deleted",
+        })
+      : res.json({
+          status: "error",
+          message: "Unable to deleted the book ",
+        });
   } catch (error) {
     res.json({
       status: "error",
-      message: "unable to delete book",
+      message: error.message,
     });
   }
 });
