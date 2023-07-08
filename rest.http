@@ -3,6 +3,9 @@
 ### server testing
 @userApi = {{rootApi}}/api/v1/user
 
+###
+@burrowApi = {{rootApi}}/api/v1/burrow
+
 GET {{rootApi}}
 
 #### GETuser
@@ -22,4 +25,19 @@ Content-Type: application/json
     "email": "emil@11",
     "password": "1234"
     
+}
+
+//Burrow api
+###
+POST ({{{burrowApi}}}
+Content-Type: application/json
+
+{
+    "bookId" :"skjfo9844",
+    "BookName": "Ashish",
+    "thumnbnail": "http://....",
+    "userId": "addjjdj2344",
+    "userName": "How to code",
+    "returnedDate": "23 jan"
+
 }
