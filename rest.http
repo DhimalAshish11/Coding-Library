@@ -6,10 +6,28 @@
 ###
 @burrowApi = {{rootApi}}/api/v1/burrow
 
+###
+@bookApi = {{rootApi}}/api/v1/book
+
+
 GET {{rootApi}}
 
 #### GETuser
 GET {{userApi}}
+
+
+
+# ============ Book api 
+### fetch all book
+GET {{bookApi}}
+Authorization: 6497a013e40152afd6a992a3
+
+# ======== burrow api
+### fetch
+GET  {{burrowApi}}
+Authorization: 649f7e1bc8a1cb1a04553de3
+
+
 
 
 #### CXREATE USER

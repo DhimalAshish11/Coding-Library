@@ -15,6 +15,8 @@ connectMongoDB();
 
 //middleware
 
+auth;
+
 app.use(morgan("dev"));
 
 app.use(express.json());
@@ -25,9 +27,10 @@ app.use(cors());
 import useRouter from "./src/routers/userRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
 import burrowRouter from "./src/routers/burrowRouter.js";
+import { auth } from "./src/middleware/authMiddleware.js";
 app.use("/api/v1/user", useRouter);
 app.use("/api/v1/book", bookRouter);
-app.use("/api/v1/burrow", burrowRouter);
+app.use("/api/v1/burrow", auth, burrowRouter);
 
 /* app.use("/api/v1/user", (req, res) => {
   res.json({
