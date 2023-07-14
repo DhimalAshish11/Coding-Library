@@ -8,7 +8,6 @@ export const auth = async (req, res, next) => {
     const { authorization } = req.headers;
 
     const user = await getUserById(authorization);
-    console.log(user);
 
     if (user?._id) {
       user.password = undefined;
