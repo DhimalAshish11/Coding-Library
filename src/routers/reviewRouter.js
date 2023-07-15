@@ -1,6 +1,10 @@
 import express from "express";
 import { auth } from "../middleware/authMiddleware.js";
-import { addReview, getReviews } from "../models/review/ReviewModel.js";
+import {
+  addReview,
+  getReviews,
+  updateReview,
+} from "../models/review/ReviewModel.js";
 import { updateBurrow } from "../models/burrow/BurrowModel.js";
 const router = express.Router();
 
@@ -51,4 +55,25 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.patch("/", auth, async (req, res) => {
+  try {
+    const { _id, status } = req.body;
+    const reviews = await updateReview(_id, { status });
+
+    reviews?._id
+      ? res.json({
+          status: "success",
+          message: "Updated successfully",
+        })
+      : res.json({
+          status: "error",
+          message: "Unabel to Update status",
+        });
+  } catch (error) {
+    res.json({
+      status: "error",
+      message: error.message,
+    });
+  }
+});
 export default router;
