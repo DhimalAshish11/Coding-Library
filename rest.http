@@ -9,6 +9,10 @@
 ###
 @bookApi = {{rootApi}}/api/v1/book
 
+###
+@reviewApi = {{rootApi}}/api/v1/review
+
+
 
 GET {{rootApi}}
 
@@ -59,3 +63,10 @@ Content-Type: application/json
     "returnedDate": "23 jan"
 
 }
+
+
+#====review api
+
+###
+
+GET {{reviewApi}}
